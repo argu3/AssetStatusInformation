@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AssetStatusInfo" GeneratedClassName="AllSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="stockQueryRoot" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//query excluding select ending with locationFieldName='</Value>
+    </Setting>
+    <Setting Name="nonStockQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//query ending with locationFieldName='</Value>
+    </Setting>
+    <Setting Name="phoneQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//query ending with locationFieldName='='</Value>
+    </Setting>
+    <Setting Name="locationQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//query returning 1 column</Value>
+    </Setting>
+    <Setting Name="connectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//SqlConnection connectionName = new SqlConnection(connectionString);</Value>
+    </Setting>
+    <Setting Name="GetsStockItems" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//| separated list of locations </Value>
+    </Setting>
+    <Setting Name="CantBeDeliveredTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//| separated list of locations that can't be delivered to, for example "All Sites"</Value>
+    </Setting>
+    <Setting Name="NonSearchableFields" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//| separated list of db columns which can't be searched by the user</Value>
+    </Setting>
+    <Setting Name="ColumnFriendlyNameMapping" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//| separated list of comma-separated pairs where the db column name is first and the display name is 2nd</Value>
+    </Setting>
+    <Setting Name="AmountFieldName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//db field name which matches the count of the item in the warehouse</Value>
+    </Setting>
+    <Setting Name="CompoundLocationList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//if 1 ship-to location has sublocations, they can be placed here as a | separated list</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
