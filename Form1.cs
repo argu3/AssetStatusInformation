@@ -12,6 +12,7 @@ namespace AssetStatusInfo
     public partial class Form1 : Form
     {
         public Form ManifestValidation;
+        public Form Unrecd;
         private static double dataGridLocationX = .5;
         private static double dataGridLocationY = .20;
         private static double dataGridSizeX = .95;
@@ -26,12 +27,13 @@ namespace AssetStatusInfo
         GridFormatter gridFormatter = new GridFormatter();
         public Form1()
         {
+            MaximizeBox = true;
             InitializeComponent();
             historySearchGrid = new SearchGridDecorator(historyGrid, searchGrid, searchButton, searchClearButton, () => { DataTable r = DatabaseQueries.GetHistory(comboBoxLocation(), fullHistory.Checked); AdjustElements(); return r; });
-            historySearchGrid.AddSearchAction(()=>AdjustElements());
-            historySearchGrid.AddSearchClearAction(()=>AdjustElements());
+            historySearchGrid.AddSearchAction(() => AdjustElements());
+            historySearchGrid.AddSearchClearAction(() => AdjustElements());
             historySearchGrid.nonSearchableFields = AllSettings.Default.NonSearchableFields.Split("|");
-                //new List<string>() { "TimeReceived", "Total", "Needed", "Found", "Site", "Amount", "AmountAtADC" };
+            //new List<string>() { "TimeReceived", "Total", "Needed", "Found", "Site", "Amount", "AmountAtADC" };
             //historyGrid.ColumnWidthChanged += AdjustElements;// HistoryGrid_ColumnWidthChanged; ;
             historyGrid.DataContextChanged += AdjustElements; //HistoryGrid_DataContextChanged;
             locationSelector.SelectedIndexChanged += LocationSelector_SelectedIndexChanged;
@@ -68,7 +70,7 @@ namespace AssetStatusInfo
             {
                 s = (DataGridView)sender;
                 DataGridViewCell cell = s.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if(!searchGridConfig.Validate(cell))
+                if (!searchGridConfig.Validate(cell))
                 {
                     cell.Value = DBNull.Value;
                 }
@@ -82,7 +84,7 @@ namespace AssetStatusInfo
                 s = (DataGridView)sender;
                 DataGridViewCell errorCell = s.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 //searchGridConfig.configurations[gridFormatter.inverseNameMap[errorCell.OwningColumn.Name]].Validate(errorCell.Value.ToString());
-                string userInput = e.Exception.Message.Replace("The input string '", "").Replace("' was not in a correct format.","");
+                string userInput = e.Exception.Message.Replace("The input string '", "").Replace("' was not in a correct format.", "");
                 searchGridConfig.configurations[gridFormatter.inverseNameMap[errorCell.OwningColumn.Name]].Validate(userInput);
             }
             else
@@ -128,7 +130,8 @@ namespace AssetStatusInfo
             locationSelectorLabel.Location = new Point(historyLabel.Location.X, locationSelector.Location.Y - (int)(1.3 * locationSelectorLabel.Height));
             prepareDelivery.Location = new Point(locationSelector.Location.X + (int)(1.2 * prepareDelivery.Width), locationSelector.Location.Y);
             showHistory.Location = new Point(prepareDelivery.Location.X + (int)(1.2 * showHistory.Width), locationSelector.Location.Y);
-            fullHistory.Location = new Point(showHistory.Location.X + (int)(1.2 * fullHistory.Width), locationSelector.Location.Y);
+            unrecdItems.Location = new Point(showHistory.Location.X + (int)(1.05 * unrecdItems.Width), locationSelector.Location.Y);
+            fullHistory.Location = new Point(unrecdItems.Location.X + (int)(1.2 * fullHistory.Width), locationSelector.Location.Y);
             FormClosing += Form1_FormClosing;
             //deletePanel.Location = delete.Location;
             historySearchGrid.MatchColumnWidth();
@@ -182,18 +185,17 @@ namespace AssetStatusInfo
             string noDelivery = AllSettings.Default.CantBeDeliveredTo;
             if (noDelivery.Length >= 1)
             {
-                if(noDelivery.Contains(location))
+                if (noDelivery.Contains(location))
                 {
                     MessageBox.Show("We don't deliver there. Please pick a different site to prepare the delivery for.", "Pick a site", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
                     ManifestValidation = new ManifestValidation(location);
-                    ManifestValidation.MaximizeBox = true;
                     ManifestValidation.Show();
                 }
             }
-            
+
         }
 
         private void fullHistory_CheckedChanged(object sender, EventArgs e)
@@ -213,6 +215,13 @@ namespace AssetStatusInfo
                 updateHistoryLabel();
                 button1_Click(new object(), new EventArgs());//, s.Checked);
             }
+        }
+
+        private void unrecdItems_Click(object sender, EventArgs e)
+        {
+            Unrecd = new Unreceived();
+            Unrecd.Show();
+            Unrecd.MaximizeBox = true;
         }
     }
 }

@@ -30,8 +30,9 @@ namespace AssetStatusInfo
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             historyGrid = new DataGridView();
             locationSelector = new ComboBox();
             showHistory = new Button();
@@ -42,6 +43,7 @@ namespace AssetStatusInfo
             searchGrid = new DataGridView();
             searchClearButton = new Button();
             searchButton = new Button();
+            unrecdItems = new Button();
             ((System.ComponentModel.ISupportInitialize)historyGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchGrid).BeginInit();
             SuspendLayout();
@@ -94,7 +96,7 @@ namespace AssetStatusInfo
             fullHistory.AutoSize = true;
             fullHistory.Checked = true;
             fullHistory.CheckState = CheckState.Checked;
-            fullHistory.Location = new Point(498, 34);
+            fullHistory.Location = new Point(678, 34);
             fullHistory.Name = "fullHistory";
             fullHistory.Size = new Size(150, 24);
             fullHistory.TabIndex = 5;
@@ -127,21 +129,21 @@ namespace AssetStatusInfo
             searchGrid.AllowUserToDeleteRows = false;
             searchGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             searchGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Control;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            searchGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            searchGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             searchGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             searchGrid.EditMode = DataGridViewEditMode.EditOnKeystroke;
             searchGrid.Location = new Point(27, 67);
             searchGrid.Name = "searchGrid";
             searchGrid.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            searchGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            searchGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             searchGrid.RowTemplate.Height = 35;
             searchGrid.Size = new Size(1539, 70);
             searchGrid.StandardTab = true;
@@ -166,12 +168,23 @@ namespace AssetStatusInfo
             searchButton.Text = "Search";
             searchButton.UseVisualStyleBackColor = true;
             // 
+            // unrecdItems
+            // 
+            unrecdItems.Location = new Point(498, 31);
+            unrecdItems.Name = "unrecdItems";
+            unrecdItems.Size = new Size(174, 29);
+            unrecdItems.TabIndex = 12;
+            unrecdItems.Text = "Show Unreceived Items";
+            unrecdItems.UseVisualStyleBackColor = true;
+            unrecdItems.Click += unrecdItems_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1925, 1181);
+            Controls.Add(unrecdItems);
             Controls.Add(searchButton);
             Controls.Add(searchClearButton);
             Controls.Add(searchGrid);
@@ -182,6 +195,7 @@ namespace AssetStatusInfo
             Controls.Add(showHistory);
             Controls.Add(locationSelector);
             Controls.Add(historyGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "History View";
             Load += Form1_Load;
@@ -244,5 +258,6 @@ private void DataGridView1_DataSourceChanged(object sender, EventArgs e)
         private DataGridView searchGrid;
         private Button searchClearButton;
         private Button searchButton;
+        private Button unrecdItems;
     }
 }

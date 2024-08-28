@@ -2,12 +2,21 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Configurations>Debug;Release;Build</Configurations>
+    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <StartupObject>AssetStatusInfo.Program</StartupObject>
+    <ApplicationIcon>Icon1.ico</ApplicationIcon>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>False</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Icon1.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
@@ -15,17 +24,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AllSettings-Commented.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>AllSettings-Commented.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="AllSettings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
       <DependentUpon>AllSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="AllSettings.settings">
+    <None Update="AllSettings-Commented.settings">
+      <LastGenOutput>AllSettings-Commented.Designer.cs</LastGenOutput>
       <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+    <None Update="AllSettings.settings">
       <LastGenOutput>AllSettings.Designer.cs</LastGenOutput>
+      <Generator>SettingsSingleFileGenerator</Generator>
     </None>
   </ItemGroup>
 

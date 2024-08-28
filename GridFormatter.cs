@@ -15,7 +15,7 @@ namespace AssetStatusInfo
         public Dictionary<string, string> inverseNameMap = new Dictionary<string, string>();
         public GridFormatter() 
         {
-            string[] names = AllSettings.Default.ColumnFriendlyNameMapping.Split("|");
+            string[] names = AllSettings.Default.ColumnFriendlyNameMappingHistory.Split("|");
             foreach(string name in names)
             {
                 nameMap[name.Split(",")[0]] = name.Split(",")[1];
@@ -124,7 +124,32 @@ namespace AssetStatusInfo
                 builder.HasValueMinMax(0, null);
                 configs.AddConfiguration("AmountAtADC", builder.Build());
             }
-            
+            else if (formatName == "unreceivedSearchGrid")
+            {
+
+                builder.HasLengthMinMax(0, 100);
+                configs.AddConfiguration("ItemDescription", builder.Build());
+                //
+                builder.HasLengthMinMax(0, 30);
+                configs.AddConfiguration("CustomerPurchaseOrder", builder.Build());
+                //
+                builder.Reset(typeof(ulong));
+                builder.HasLength(7);
+                configs.AddConfiguration("TicketNumber", builder.Build());
+                //
+                builder.Reset(typeof(DateTime));
+                configs.AddConfiguration("InvoiceDate", builder.Build());
+                configs.AddConfiguration("OrderDate", builder.Build());
+                //
+                builder.Reset(typeof(string));
+                configs.AddConfiguration("SerialNumber", builder.Build());
+                //
+                builder.Reset(typeof(ulong));
+                builder.HasLength(6);
+                builder.HasCodeWords(["N/A"]);
+                configs.AddConfiguration("AssetTag", builder.Build());
+            }
+
             return configs;
         }
         public DataTable DataTableColumnHeaderFormatting(DataTable grid)

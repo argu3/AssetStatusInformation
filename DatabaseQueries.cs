@@ -89,6 +89,10 @@ namespace AssetStatusInfo
             returnList.Add("All Sites");
             return returnList;
         }
+        public static System.Data.DataTable GetUnreceived()
+        {
+            return (GetDatabaseQuery(AllSettings.Default.unreceivedQuery, new System.Data.DataSet())).Tables[0];
+        }
         public static System.Data.DataTable GetHistory(string location, bool allItems = false)
         {
             string nonTaggedQuery = DatabaseQueries.nonStock;
@@ -111,10 +115,11 @@ namespace AssetStatusInfo
                 {
                     locationSql += $" OR location = '{loc}'";
                 }
+                locationSql += ")";
             }
             else
             {
-                locationSql = location + "'";
+                locationSql = location + "')";
             }
             ds = GetDatabaseQuery((nonTaggedQuery + locationSql), ds);
             if (locationHistoryConfig.Contains(location))

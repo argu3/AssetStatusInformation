@@ -7,5 +7,8 @@
     <Compile Update="ManifestValidation.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Unreceived.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManifestValidation));
             historyGrid = new DataGridView();
             historyCheckbox = new DataGridViewCheckBoxColumn();
             manifestGrid = new DataGridView();
@@ -259,6 +260,7 @@
             Controls.Add(manifestGrid);
             Controls.Add(historyGrid);
             Controls.Add(deleteButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "ManifestValidation";
             Text = "History View";
